@@ -8,9 +8,15 @@ tab1, tab2, tab3, tab4 = st.tabs(["Zakładka 1", "Zakładka 2", "Zakładka 3", "
 with tab1:
     st.header("Zawartość zakładki 1")
 
+    values_to_select = ["Select 1", "Select 2", "Select 3", "Select 4"]
     selected_option = st.selectbox(
-        "Label widgetu", ["Select 1", "Select 2", "Select 3", "Select 4"])
+        "Label widgetu", values_to_select,
+        index=(values_to_select.index(st.session_state.selected_value)
+               if hasattr(st.session_state, "selected_value") else 0)
+    )
+
     st.write("Wybrano:", selected_option)
+    st.session_state.selected_value = selected_option
     st.divider()
 
     selected_option = st.radio("Label widgetu", ["Radio 1", "Radio 2", "Radio 3", "Radio 4"])
