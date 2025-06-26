@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import io
+import time
 
 
 st.text("Pierwsza strona")
@@ -110,7 +110,30 @@ with tab2:
 
 with tab3:
     st.header("Zawartość zakładki 3")
-    st.write("To jest zawartość trzeciej zakładki")
+
+    @st.cache_data(show_spinner=False)
+    def time_consuming_operation(x):
+        time.sleep(4)
+        return (x+1)*2
+
+    number = st.number_input("Wpisz liczbę")
+
+    if st.button("Uruchom operację") and number:
+        with st.spinner("Trwa przetwarzanie"):
+            result = time_consuming_operation(number)
+        st.write("Wynik:", result)
+
+    st.divider()
+    if st.button("Uruchom proces z progress barem"):
+        progress_bar = st.progress(0)
+        status_text = st.empty()
+
+        for step in range(20):
+            time.sleep(0.5)
+            progress_bar.progress((step+1)/20)
+            status_text.text(f"Krok {step+1} z 20")
+
+        st.success("Proces zakończony pomyślnie")
 
 with tab4:
     st.header("Zawartość zakładki 4")
