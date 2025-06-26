@@ -7,7 +7,63 @@ tab1, tab2, tab3, tab4 = st.tabs(["Zakładka 1", "Zakładka 2", "Zakładka 3", "
 
 with tab1:
     st.header("Zawartość zakładki 1")
-    st.write("To jest zawartość pierwszej zakładki")
+
+    selected_option = st.selectbox(
+        "Label widgetu", ["Select 1", "Select 2", "Select 3", "Select 4"])
+    st.write("Wybrano:", selected_option)
+    st.divider()
+
+    selected_option = st.radio("Label widgetu", ["Radio 1", "Radio 2", "Radio 3", "Radio 4"])
+    st.write("Wybrano:", selected_option)
+    st.divider()
+
+    selected_options = st.multiselect(
+        "Wybierz opcje:", ["Multi 1", "Multi 2", "Multi 3", "Multi 4"])
+    st.write("Wybrano:", str(selected_options))
+    st.divider()
+
+    checked = st.checkbox("Zaznacz mnie")
+    if checked:
+        st.write("Pole jest zaznaczone")
+    else:
+        st.write("Pole nie jest zaznaczone")
+    st.divider()
+
+    checked = st.toggle("Włącz/wyłącz", value=True)
+    if checked:
+        st.write("Toggle jest włączony")
+    else:
+        st.write("Toggle jest wyłączony")
+    st.divider()
+
+    value = st.slider("Wybierz wartość", min_value=10, max_value=30, step=2, value=16)
+    st.write("Wybrana wartość:", value)
+    st.divider()
+
+    values = st.slider("Wybierz wartości:", min_value=10, max_value=30, step=2, value=[12, 18])
+    st.write("Wybrana wartości:", values)
+    st.divider()
+
+    text = st.text_input("Wprowadź tekst:")
+    st.write("Wprowadzony tekst:", text)
+    st.divider()
+
+    number = st.number_input("Podaj liczbę", min_value=1.0, max_value=10.0, value=4.0, step=0.5)
+    st.write("Podana liczba:", number)
+    st.divider()
+
+    long_text = st.text_area("Wpisz długi tekst")
+    st.write("Wpisany tekst:", long_text)
+    st.divider()
+
+    date = st.date_input("Podaj datę")
+    st.write("Podana data:", date)
+    st.divider()
+
+    if st.button("Pokaż wiadomość"):
+        st.success("To jest ukryta wiadomość")
+
+    st.divider()
 
 with tab2:
     st.header("Zawartość zakładki 2")
