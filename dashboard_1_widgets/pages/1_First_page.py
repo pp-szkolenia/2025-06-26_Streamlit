@@ -9,14 +9,21 @@ with tab1:
     st.header("Zawartość zakładki 1")
 
     values_to_select = ["Select 1", "Select 2", "Select 3", "Select 4"]
-    selected_option = st.selectbox(
+    if "selectbox_value" not in st.session_state:
+        st.session_state.selectbox_value = values_to_select[0]
+
+    def on_select_change():
+        st.session_state.selectbox_value = st.session_state.selectbox_key
+
+    st.selectbox(
         "Label widgetu", values_to_select,
-        index=(values_to_select.index(st.session_state.selected_value)
-               if hasattr(st.session_state, "selected_value") else 0)
+        index=values_to_select.index(st.session_state.selectbox_value),
+        key="selectbox_key",
+        on_change=on_select_change
     )
 
-    st.write("Wybrano:", selected_option)
-    st.session_state.selected_value = selected_option
+    st.write("Wybrano:", st.session_state.selectbox_value)
+    # st.session_state.selected_value = selected_option
     st.divider()
 
     selected_option = st.radio("Label widgetu", ["Radio 1", "Radio 2", "Radio 3", "Radio 4"])
