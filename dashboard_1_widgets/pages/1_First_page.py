@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import io
 
 
 st.text("Pierwsza strona")
@@ -80,7 +82,31 @@ with tab1:
 
 with tab2:
     st.header("Zawartość zakładki 2")
-    st.write("To jest zawartość drugiej zakładki")
+    uploaded_file = st.file_uploader("Wybierz plik .csv", type="csv")
+    # print("!!!", type(uploaded_file), "|", uploaded_file)
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
+        st.write("Zawartość pliku .csv:")
+        st.dataframe(df)
+    else:
+        st.info("Proszę wczytać plik csv")
+
+    st.divider()
+    data = {
+        "Kolumna 1": [1, 2, 3, 4],
+        "Kolumna 2": ["A", "B", "C", "D"]
+    }
+    df = pd.DataFrame(data)
+
+    st.write("Przykladowy dataframe")
+    st.dataframe(df)
+
+    csv = df.to_csv(index=False).encode("utf-8")
+    print("!!!", type(csv), "|", csv)
+
+    st.download_button(
+        "Pobierz jako csv", data=csv, file_name="dane.csv", mime="text/csv"
+    )
 
 with tab3:
     st.header("Zawartość zakładki 3")
