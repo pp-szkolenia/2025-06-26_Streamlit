@@ -105,7 +105,7 @@ with tab2:
     st.dataframe(df)
 
     csv = df.to_csv(index=False).encode("utf-8")
-    print("!!!", type(csv), "|", csv)
+    # print("!!!", type(csv), "|", csv)
 
     st.download_button(
         "Pobierz jako csv", data=csv, file_name="dane.csv", mime="text/csv"

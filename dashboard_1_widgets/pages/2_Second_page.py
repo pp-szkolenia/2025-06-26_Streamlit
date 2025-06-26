@@ -1,9 +1,22 @@
 import streamlit as st
+import plotly.express as px
 
 
-if hasattr(st.session_state, "selectbox_value"):
-    selected_option = st.session_state.selectbox_value
-else:
-    selected_option = None
+df = st.session_state.df
 
-st.write("Selectbox:", selected_option)
+# Histogram
+fig_hist = px.histogram(
+    df, x="Age", nbins=30,
+    title="Rozkład wieku pasażerów"
+)
+st.plotly_chart(fig_hist)
+
+# Barplot
+sex_counts = df["Sex"].value_counts().reset_index()
+sex_counts.columns = ["Sex", "Count"]
+fig_bar = px.bar(
+    sex_counts,
+    x="Sex", y="Count",
+    title="Liczba pasażerów wg płci"
+)
+st.plotly_chart(fig_bar)
