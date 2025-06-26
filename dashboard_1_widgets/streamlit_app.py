@@ -24,3 +24,12 @@ with st.sidebar:
     st.divider()
     st.text("hello")
 
+#
+# PAGES = {
+#     "Pierwsza strona": "pages/1_First_page.py",
+#     "Druga strona": "pages/2_Second_page.py"
+# }
+#
+# pages = [st.Page(path, title=title) for title, path in PAGES.items()]
+# nav = st.navigation(pages, position="sidebar", expanded=True)
+# nav.run()
