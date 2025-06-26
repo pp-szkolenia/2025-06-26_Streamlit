@@ -53,5 +53,5 @@ if __name__ == "__main__":
     print(df)
 
     # Update data
-    df_new = df.replace(11, 13)
+    df_new = df.replace(1, -1)
     connector.update_table("titanic", df_new)
