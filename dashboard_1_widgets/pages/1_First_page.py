@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import time
 
+from db_connector import DatabaseConnector
+
 
 st.text("Pierwsza strona")
 
@@ -86,6 +88,7 @@ with tab2:
     # print("!!!", type(uploaded_file), "|", uploaded_file)
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
+        st.session_state.df = df
         st.write("Zawartość pliku .csv:")
         st.dataframe(df)
     else:
@@ -137,4 +140,32 @@ with tab3:
 
 with tab4:
     st.header("Zawartość zakładki 4")
-    st.write("To jest zawartość czwartej zakładki")
+    if hasattr(st.session_state, "df"):
+        df = st.session_state.df.head(50)
+    else:
+        df = pd.DataFrame()
+    st.dataframe(df)
+
+    st.divider()
+
+    st.table(df)
+
+    st.divider()
+    st.json({"a": [1, 2, 3], "b": [4, 5, 6]})
+    st.divider()
+
+    DB_PATH = "data.db"
+    connector = DatabaseConnector(DB_PATH)
+    table_name = st.text_input("Podaj nazwę tabeli")
+    edited_df = st.data_editor(df, num_rows="dynamic")
+
+    if st.button("Zapisz zmiany"):
+        if edited_df.equals(df):
+            st.info("Brak zmian do zapisania")
+        else:
+            try:
+                connector.update_table(table_name, edited_df)
+                st.session_state.df = edited_df.copy()
+                st.success("Wszystkie zmiany zostały zapisane w bazie danych.")
+            except Exception as e:
+                st.error(f"Wystąpił błąd podczas zapisu: {e}")
