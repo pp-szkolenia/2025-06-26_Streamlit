@@ -1,0 +1,83 @@
+[
+  {
+    "id": 2,
+    "description": "Task 2",
+    "assigned_user_id": 3,
+    "priority": "HIGH",
+    "due_date": "2025-06-27",
+    "pinned": false,
+    "created_by": 3
+  },
+  {
+    "id": 3,
+    "description": "Task 3",
+    "assigned_user_id": 3,
+    "priority": "MEDIUM",
+    "due_date": "2025-06-23",
+    "pinned": true,
+    "created_by": 3
+  },
+  {
+    "id": 4,
+    "description": "Task 4",
+    "assigned_user_id": 2,
+    "priority": "HIGH",
+    "due_date": "2025-06-22",
+    "pinned": true,
+    "created_by": 2
+  },
+  {
+    "id": 5,
+    "description": "Task 5",
+    "assigned_user_id": 3,
+    "priority": null,
+    "due_date": "2025-07-03",
+    "pinned": true,
+    "created_by": 3
+  },
+  {
+    "id": 6,
+    "description": "Task 6",
+    "assigned_user_id": 1,
+    "priority": "HIGH",
+    "due_date": "2025-07-04",
+    "pinned": false,
+    "created_by": 1
+  },
+  {
+    "id": 7,
+    "description": "Task 7",
+    "assigned_user_id": 3,
+    "priority": null,
+    "due_date": "2025-07-05",
+    "pinned": true,
+    "created_by": 3
+  },
+  {
+    "id": 8,
+    "description": "Task 8",
+    "assigned_user_id": 2,
+    "priority": null,
+    "due_date": "2025-06-17",
+    "pinned": true,
+    "created_by": 2
+  },
+  {
+    "id": 9,
+    "description": "Task 9",
+    "assigned_user_id": 2,
+    "priority": "LOW",
+    "due_date": "2025-07-14",
+    "pinned": false,
+    "created_by": 2
+  },
+  {
+    "id": 10,
+    "description": "Task 10",
+    "assigned_user_id": 1,
+    "priority": null,
+    "due_date": "2025-07-02",
+    "pinned": false,
+    "created_by": 1
+  }
+]

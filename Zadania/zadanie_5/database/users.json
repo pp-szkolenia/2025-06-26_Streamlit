@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "admin123",
+    "role": "admin",
+    "display_name": "Administrator"
+  },
+  {
+    "id": 2,
+    "username": "john",
+    "password": "johnpass",
+    "role": "user",
+    "display_name": "John Doe"
+  },
+  {
+    "id": 3,
+    "username": "anna",
+    "password": "annapass",
+    "role": "user",
+    "display_name": "Anna Nowak"
+  },
+  {
+    "id": 4,
+    "username": "newuser",
+    "password": "newuser",
+    "role": "user",
+    "display_name": "New User"
+  }
+]
