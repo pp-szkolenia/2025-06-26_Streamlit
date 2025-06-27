@@ -33,6 +33,8 @@ def render_filters(columns, func, data):
 
 
 with st.expander("Filtry numeryczne"):
+    use_inputs = st.toggle("Użyj `st.number_input`")
+
     def numeric_filter(col, data):
         col_min, col_max = df[col].min(), df[col].max()
         state_key = f"{col}_range"
@@ -40,8 +42,16 @@ with st.expander("Filtry numeryczne"):
             st.session_state[state_key] = (col_min, col_max)
 
         current_min, current_max = st.session_state[state_key]
-        min_val, max_val = st.slider(col, col_min, col_max, (current_min, current_max),
-                                     key=f"{col}_slider")
+
+        if use_inputs:
+            c1, c2 = st.columns(2)
+            with c1:
+                min_val = st.number_input(f"{col} min", value=current_min)
+            with c2:
+                max_val = st.number_input(f"{col} max", value=current_max)
+        else:
+            min_val, max_val = st.slider(col, col_min, col_max, (current_min, current_max),
+                                         key=f"{col}_slider")
 
         return data[data[col].between(min_val, max_val)]
 
@@ -88,3 +98,19 @@ with st.expander("Filtry tekstowe"):
 
 with st.expander("Dane"):
     st.dataframe(filtered)
+
+
+col1, col2 = st.columns(2)
+
+with col1:
+    chart_type = st.selectbox("Chart type", ["histogram", "countplot"])
+    if chart_type == "histogram":
+        col = st.selectbox("Column", numeric_cols)
+        fig = px.histogram(filtered, x=col, nbins=20)
+        fig.update_traces(marker_line_color="black", marker_line_width=1)
+    if chart_type == "countplot":
+        col = st.selectbox("Column", categorical_cols)
+        fig = px.histogram(filtered, x=col)
+        fig.update_layout(bargap=0.2)
+
+    st.plotly_chart(fig)
